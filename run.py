@@ -3,7 +3,7 @@
 # @Date:   2021-03-19 11:42:16
 # @Email:   yang2210670@163.com
 # @Blog:   https://blog.ztongyang.cn
-# @Last Modified time: 2021-03-24 10:29:40
+# @Last Modified time: 2021-04-09 22:49:08
 
 import uvicorn
 from fastapi import FastAPI,Request
@@ -12,6 +12,7 @@ from api import douyin,kuaishou,weishi
 from api import wallpaper,bizhi,bing
 from api import soul,joke,shici,yiyan,today
 from api import wycloud
+from api import iploc
 
 # 接口列表
 app = FastAPI()
@@ -31,6 +32,9 @@ app.include_router(yiyan, prefix = '/yiyan', tags = ['Hitokoto一言'])
 app.include_router(today, prefix = '/today', tags = ['历史上的今天'])
 # 音乐解析类
 app.include_router(wycloud, prefix = '/wycloud', tags = ['网易云音乐解析'])
+# 实用工具类
+app.include_router(iploc, prefix = '/iploction', tags = ['ip定位'])
+
 
 # 异常响应
 @app.exception_handler(ResponseException)
