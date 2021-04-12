@@ -3,11 +3,12 @@
 # @Date:   2021-03-19 11:42:16
 # @Email:   yang2210670@163.com
 # @Blog:   https://blog.ztongyang.cn
-# @Last Modified time: 2021-04-09 22:49:08
+# @Last Modified time: 2021-04-12 21:12:01
 
 import uvicorn
 from fastapi import FastAPI,Request
 from exceptions import ResponseException
+from fastapi.middleware.cors import CORSMiddleware
 from api import douyin,kuaishou,weishi 
 from api import wallpaper,bizhi,bing
 from api import soul,joke,shici,yiyan,today
@@ -35,6 +36,15 @@ app.include_router(wycloud, prefix = '/wycloud', tags = ['网易云音乐解析'
 # 实用工具类
 app.include_router(iploc, prefix = '/iploction', tags = ['ip定位'])
 
+# 允许跨域
+origins = ["*"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # 异常响应
 @app.exception_handler(ResponseException)
